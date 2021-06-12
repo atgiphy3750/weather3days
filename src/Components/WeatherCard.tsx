@@ -21,6 +21,7 @@ const WeatherCard = (weatherData: IWeatherDataParsed) => {
 			break;
 		case '흐림':
 		case '구름많음':
+		case '구름 많음':
 			weather.Icon = IoMdCloudy;
 			weather.color = colors.cloudy;
 			break;

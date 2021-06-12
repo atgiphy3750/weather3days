@@ -46,6 +46,7 @@ const shouldUpdateWeather = (weatherOld: string, weatherNew: string) => {
 		'',
 		'맑음',
 		'구름많음',
+		'구름 많음',
 		'흐림',
 		'눈',
 		'비/눈',
