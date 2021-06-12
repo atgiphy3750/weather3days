@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App {
+	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+body {
+	background: #34d399;
+}
