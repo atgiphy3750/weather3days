@@ -3,30 +3,36 @@ import {IWeatherDataParsed} from '../Interfaces/weatherData';
 import {IoMdRainy, IoMdSunny, IoMdCloudy, IoMdSnow} from 'react-icons/io';
 
 const WeatherCard = (weatherData: IWeatherDataParsed) => {
+	const colors = {
+		sunny: '#9CA3AF',
+		cloudy: '#9CA3AF',
+		snowy: '#BFDBFE',
+		rainy: '#60A5FA'
+	};
 	const weather = {
 		Icon: IoMdSunny,
-		style: ''
+		color: ''
 	};
 	switch (weatherData.weather) {
 		case '맑음':
 		case '':
 			weather.Icon = IoMdSunny;
-			weather.style = '#FBBF24';
+			weather.color = colors.sunny;
 			break;
 		case '흐림':
 		case '구름많음':
 			weather.Icon = IoMdCloudy;
-			weather.style = '#9CA3AF';
+			weather.color = colors.cloudy;
 			break;
 		case '눈':
 			weather.Icon = IoMdSnow;
-			weather.style = '#BFDBFE';
+			weather.color = colors.snowy;
 			break;
 		case '비':
 		case '비/눈':
 		case '소나기':
 			weather.Icon = IoMdRainy;
-			weather.style = '#60A5FA';
+			weather.color = colors.rainy;
 			break;
 		default:
 			console.log(weatherData.weather);
@@ -37,7 +43,7 @@ const WeatherCard = (weatherData: IWeatherDataParsed) => {
 	const iconStyle = {
 		size: 180,
 		className: 'inline',
-		color: weather.style
+		color: weather.color
 	};
 
 	return (
