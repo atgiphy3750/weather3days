@@ -4,7 +4,7 @@ import {IoMdRainy, IoMdSunny, IoMdCloudy, IoMdSnow} from 'react-icons/io';
 
 const WeatherCard = (weatherData: IWeatherDataParsed) => {
 	const colors = {
-		sunny: '#9CA3AF',
+		sunny: '#FBBF24',
 		cloudy: '#9CA3AF',
 		snowy: '#BFDBFE',
 		rainy: '#60A5FA'
