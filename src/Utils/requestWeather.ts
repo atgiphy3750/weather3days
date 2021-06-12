@@ -8,8 +8,6 @@ const requestWeather = async () => {
 	const response = await axios.get(url);
 	const xml = response.data;
 	const json = parser.parse(xml);
-
-	// const json = await parseStringPromise(xml, {explicitArray: false});
 	const cityData = json.rss.channel.item.description.body.data;
 
 	return cityData;
