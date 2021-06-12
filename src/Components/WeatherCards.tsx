@@ -11,31 +11,25 @@ const WeatherCards = () => {
 	const [weathersByDay, setWeathersByDay] = useState<IWeathersByDay>();
 	const [load, setLoad] = useState<ILoadState>({state: 'Loading'});
 
-	useEffect(() => {
-		const setWeatherProp = async () => {
-			try {
-				const weathers = await getWeatherByDay();
-				setWeathersByDay(weathers);
-				if (weathers) {
-					setLoad({state: 'Loaded'});
-				} else {
-					setLoad({state: 'Error'});
-				}
-			} catch {
-				setLoad({state: 'Error'});
-			}
-		};
-
-		setWeatherProp();
-	}, []);
-
-	useEffect(() => {
-		const setWeatherProp = async () => {
+	const setWeatherProp = async () => {
+		try {
 			const weathers = await getWeatherByDay();
 			setWeathersByDay(weathers);
-		};
+			if (weathers) {
+				setLoad({state: 'Loaded'});
+			} else {
+				setLoad({state: 'Error'});
+			}
+		} catch {
+			setLoad({state: 'Error'});
+		}
+	};
 
-		setWeatherProp();
+	useEffect(() => {
+		const timerID = setInterval(() => setWeatherProp(), 1000 * 60 * 60);
+		return () => {
+			clearInterval(timerID);
+		};
 	}, []);
 
 	if (load.state === 'Loading') {
