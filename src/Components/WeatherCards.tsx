@@ -26,6 +26,7 @@ const WeatherCards = () => {
 	};
 
 	useEffect(() => {
+		setWeatherProp();
 		const timerID = setInterval(() => setWeatherProp(), 1000 * 60 * 60);
 		return () => {
 			clearInterval(timerID);
