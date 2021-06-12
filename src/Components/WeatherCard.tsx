@@ -15,7 +15,6 @@ const WeatherCard = (weatherData: IWeatherDataParsed) => {
 	};
 	switch (weatherData.weather) {
 		case '맑음':
-		case '':
 			weather.Icon = IoMdSunny;
 			weather.color = colors.sunny;
 			break;
