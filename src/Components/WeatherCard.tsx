@@ -5,43 +5,39 @@ import {IoMdRainy, IoMdSunny, IoMdCloudy, IoMdSnow} from 'react-icons/io';
 const WeatherCard = (weatherData: IWeatherDataParsed) => {
 	const weather = {
 		Icon: IoMdSunny,
-		color: '',
-		colorWeight: '500'
+		style: ''
 	};
 	switch (weatherData.weather) {
 		case '맑음':
 		case '':
 			weather.Icon = IoMdSunny;
-			weather.color = 'yellow';
-			weather.colorWeight = '400';
+			weather.style = '#FBBF24';
 			break;
 		case '흐림':
 		case '구름많음':
 			weather.Icon = IoMdCloudy;
-			weather.color = 'gray';
-			weather.colorWeight = '400';
+			weather.style = '#9CA3AF';
 			break;
 		case '눈':
 			weather.Icon = IoMdSnow;
-			weather.color = 'blue';
-			weather.colorWeight = '200';
+			weather.style = '#BFDBFE';
 			break;
 		case '비':
 		case '비/눈':
 		case '소나기':
 			weather.Icon = IoMdRainy;
-			weather.color = 'blue';
-			weather.colorWeight = '400';
+			weather.style = '#60A5FA';
 			break;
 		default:
 			console.log(weatherData.weather);
-			console.log('WeatherIcon Error');
+			console.log(`WeatherIcon Error on ${weatherData.weather}`);
 	}
 
 	const dayWords = ['오늘', '내일', '모레'];
 	const iconStyle = {
 		size: 180,
-		className: `inline text-${weather.color}-${weather.colorWeight}`
+		className: 'inline',
+		color: weather.style
 	};
 
 	return (
