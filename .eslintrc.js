@@ -3,10 +3,7 @@ module.exports = {
 		browser: true,
 		es2021: true
 	},
-	extends: [
-		'plugin:react/recommended',
-		'xo'
-	],
+	extends: ['plugin:react/recommended', 'xo'],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaFeatures: {
@@ -15,10 +12,14 @@ module.exports = {
 		ecmaVersion: 12,
 		sourceType: 'module'
 	},
-	plugins: [
-		'react',
-		'@typescript-eslint'
-	],
-	rules: {
-	}
+	plugins: ['react', '@typescript-eslint'],
+	rules: {},
+	overrides: [
+		{
+			files: ['*.tsx', '*.ts'],
+			rules: {
+				'no-undef': 'off'
+			}
+		}
+	]
 };
