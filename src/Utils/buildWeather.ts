@@ -22,7 +22,6 @@ const categorizeWeathers = (weathersRaw: IWeatherDataRaw[]) => {
 	const afterTomorrow: IWeatherDataParsed[] = [];
 
 	const {length} = weathersRaw;
-
 	for (let i = 0; i < length; i++) {
 		const weatherData: IWeatherDataParsed = parseWeather(weathersRaw[i]);
 		if (weatherData.day === 0) {
@@ -63,7 +62,7 @@ const shouldUpdateWeather = (weatherOld: string, weatherNew: string) => {
 
 const mergeWeathers = (weathersParsed: IWeatherDataParsed[]) => {
 	const weather: IWeatherDataParsed = {
-		day: weathersParsed[0].day,
+		day: weathersParsed[0] ? weathersParsed[0].day : 0,
 		hour: 0,
 		weather: '',
 		pop: 0,

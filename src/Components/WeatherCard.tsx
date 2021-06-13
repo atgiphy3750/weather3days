@@ -1,6 +1,12 @@
 import React from 'react';
 import {IWeatherDataParsed} from '../Interfaces/weatherData';
-import {IoMdRainy, IoMdSunny, IoMdCloudy, IoMdSnow} from 'react-icons/io';
+import {
+	IoMdRainy,
+	IoMdSunny,
+	IoMdCloudy,
+	IoMdSnow,
+	IoMdWarning
+} from 'react-icons/io';
 
 const WeatherCard = (weatherData: IWeatherDataParsed) => {
 	const colors = {
@@ -35,8 +41,9 @@ const WeatherCard = (weatherData: IWeatherDataParsed) => {
 			weather.color = colors.rainy;
 			break;
 		default:
-			console.log(weatherData.weather);
-			console.log(`WeatherIcon Error on ${weatherData.weather}`);
+			weather.Icon = IoMdWarning;
+			weather.color = 'salmon';
+			console.log(`No weather data. Today is ending.. ${weatherData.weather}`);
 	}
 
 	const dayWords = ['오늘', '내일', '모레'];
@@ -44,6 +51,27 @@ const WeatherCard = (weatherData: IWeatherDataParsed) => {
 		size: 180,
 		className: 'inline',
 		color: weather.color
+	};
+
+	const tempAndPop = () => {
+		if (weatherData.weather) {
+			return (
+				<>
+					<div>
+						<span>{weatherData.temp}°C</span>
+					</div>
+					<div>
+						<span>{weatherData.pop}%</span>
+					</div>
+				</>
+			);
+		}
+
+		return (
+			<>
+				<div>NO DATA</div>
+			</>
+		);
 	};
 
 	return (
@@ -54,13 +82,12 @@ const WeatherCard = (weatherData: IWeatherDataParsed) => {
 			<div className="py-12 px-12">
 				<weather.Icon {...iconStyle} />
 			</div>
-			<div className="flex flex-row items-center justify-between text-3xl px-10">
-				<div>
-					<span>{weatherData.temp}°C</span>
-				</div>
-				<div>
-					<span>{weatherData.pop}%</span>
-				</div>
+			<div
+				className={`flex flex-row items-center ${
+					weatherData.weather ? 'justify-between' : 'justify-center'
+				} text-3xl px-10`}
+			>
+				{tempAndPop()}
 			</div>
 		</div>
 	);
