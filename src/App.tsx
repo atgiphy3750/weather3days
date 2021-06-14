@@ -3,13 +3,13 @@ import UpdateTime from './Components/UpdateTime';
 import useFetch from './Hooks/useFetch';
 
 const App = () => {
-	const [isLoaded, isError, updateTime, WeatherCards] = useFetch();
+	const [isLoading, isError, updateTime, WeatherCards] = useFetch();
 
 	if (isError) {
 		return <p>Error!</p>;
 	}
 
-	if (!isLoaded) {
+	if (isLoading) {
 		return <p>Loading</p>;
 	}
 

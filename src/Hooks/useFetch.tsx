@@ -7,7 +7,7 @@ import {getWeatherByDay} from '../Utils/getWeatherByDay';
 import WeatherCard from '../Components/WeatherCard';
 
 const useFetch = (): [boolean, boolean, Date, () => JSX.Element] => {
-	const [isLoaded, setIsLoaded] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [data, setData] = useState<IWeathersByDay | null>(null);
 
@@ -15,16 +15,17 @@ const useFetch = (): [boolean, boolean, Date, () => JSX.Element] => {
 	const [updateTime, setUpdateTime] = useState(updateTimeInit);
 
 	const handleFetch = async () => {
+		setIsLoading(true);
+		setIsError(false);
+
 		try {
 			const weatherData = await getWeatherByDay();
 			setData(weatherData);
-
-			setIsLoaded(true);
-			setIsError(false);
-		} catch {
-			setIsLoaded(false);
+			setIsLoading(true);
+		} catch (error) {
 			setIsError(true);
 		}
+		setIsLoading(false);
 	};
 
 	const handleUpdateTime = () => {
@@ -56,7 +57,7 @@ const useFetch = (): [boolean, boolean, Date, () => JSX.Element] => {
 		);
 	};
 
-	return [isLoaded, isError, updateTime, render];
+	return [isLoading, isError, updateTime, render];
 };
 
 export default useFetch;
