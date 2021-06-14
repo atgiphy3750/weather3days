@@ -5,18 +5,26 @@ import useFetch from './Hooks/useFetch';
 const App = () => {
 	const [isLoading, isError, updateTime, WeatherCards] = useFetch();
 
-	if (isError) {
-		return <p>Error!</p>;
-	}
+	const render = () => {
+		if (isError) {
+			return <p>Error!</p>;
+		}
 
-	if (isLoading) {
-		return <p>Loading</p>;
-	}
+		if (isLoading) {
+			return <p>Loading...</p>;
+		}
+
+		return (
+			<>
+				<WeatherCards />
+				<UpdateTime time={updateTime} />
+			</>
+		);
+	};
 
 	return (
 		<div className="App h-screen justify-center items-center flex flex-col">
-			<WeatherCards />
-			<UpdateTime time={updateTime} />
+			{render()}
 		</div>
 	);
 };
