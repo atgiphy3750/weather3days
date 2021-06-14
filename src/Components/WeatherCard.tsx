@@ -75,7 +75,7 @@ const WeatherCard = (weatherData: IWeatherDataParsed) => {
 	};
 
 	return (
-		<div className="bg-gradient-to-br from-white to-blue-50 bg-blue-50 rounded-3xl py-14 shadow-xl">
+		<div className="bg-gradient-to-br from-white to-blue-50 rounded-3xl py-14 shadow-xl">
 			<div className="text-4xl items-center justify-center flex">
 				<p>{dayWords[Number(weatherData.day)]}</p>
 			</div>
