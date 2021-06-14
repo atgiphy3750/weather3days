@@ -21,10 +21,10 @@ const useFetch = (): [boolean, boolean, Date, () => JSX.Element] => {
 		try {
 			const weatherData = await getWeatherByDay();
 			setData(weatherData);
-			setIsLoading(true);
-		} catch (error) {
+		} catch {
 			setIsError(true);
 		}
+
 		setIsLoading(false);
 	};
 
@@ -48,13 +48,20 @@ const useFetch = (): [boolean, boolean, Date, () => JSX.Element] => {
 	}, []);
 
 	const render = () => {
-		return (
-			<div className="flex flex-row space-x-10 m-10">
-				<WeatherCard {...data!.today} />
-				<WeatherCard {...data!.tomorrow} />
-				<WeatherCard {...data!.afterTomorrow} />
-			</div>
-		);
+		let result;
+		if (data) {
+			result = (
+				<div className="flex flex-row space-x-10 m-10">
+					<WeatherCard {...data.today} />
+					<WeatherCard {...data.tomorrow} />
+					<WeatherCard {...data.afterTomorrow} />
+				</div>
+			);
+		} else {
+			result = <div>DATA IS NULL OR UNDEFINED</div>;
+		}
+
+		return result;
 	};
 
 	return [isLoading, isError, updateTime, render];
