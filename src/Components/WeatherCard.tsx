@@ -1,12 +1,7 @@
 import React from 'react';
 import {IWeatherDataParsed} from '../Interfaces/weatherData';
-import {
-	IoMdRainy,
-	IoMdSunny,
-	IoMdCloudy,
-	IoMdSnow,
-	IoMdWarning
-} from 'react-icons/io';
+import {IoMdWarning} from 'react-icons/io';
+import {WiDaySunny, WiCloud, WiRain, WiSnow} from 'react-icons/wi';
 
 const WeatherCard = (weatherData: IWeatherDataParsed) => {
 	const colors = {
@@ -16,34 +11,36 @@ const WeatherCard = (weatherData: IWeatherDataParsed) => {
 		rainy: '#60A5FA'
 	};
 	const weather = {
-		Icon: IoMdSunny,
+		Icon: WiDaySunny,
 		color: ''
 	};
 	switch (weatherData.weather) {
 		case '맑음':
-			weather.Icon = IoMdSunny;
+			weather.Icon = WiDaySunny;
 			weather.color = colors.sunny;
 			break;
 		case '흐림':
 		case '구름많음':
 		case '구름 많음':
-			weather.Icon = IoMdCloudy;
+			weather.Icon = WiCloud;
 			weather.color = colors.cloudy;
 			break;
 		case '눈':
-			weather.Icon = IoMdSnow;
+			weather.Icon = WiRain;
 			weather.color = colors.snowy;
 			break;
 		case '비':
 		case '비/눈':
 		case '소나기':
-			weather.Icon = IoMdRainy;
+			weather.Icon = WiSnow;
 			weather.color = colors.rainy;
 			break;
 		default:
 			weather.Icon = IoMdWarning;
 			weather.color = 'salmon';
-			console.log(`No weather data. Today is ending.. ${weatherData.weather}`);
+			console.log(
+				`No weather data. Maybe today is almost over.. ${weatherData.weather}`
+			);
 	}
 
 	const dayWords = ['오늘', '내일', '모레'];
@@ -83,9 +80,7 @@ const WeatherCard = (weatherData: IWeatherDataParsed) => {
 				<weather.Icon {...iconStyle} />
 			</div>
 			<div
-				className={`flex flex-row items-center ${
-					weatherData.weather ? 'justify-between' : 'justify-center'
-				} text-3xl px-10`}
+				className={'flex flex-row items-center justify-center text-3xl px-10'}
 			>
 				{tempAndPop()}
 			</div>
