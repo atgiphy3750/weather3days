@@ -80,7 +80,9 @@ const WeatherCard = (weatherData: IWeatherDataParsed) => {
 				<weather.Icon {...iconStyle} />
 			</div>
 			<div
-				className={'flex flex-row items-center justify-center text-3xl px-10'}
+				className={`flex flex-row items-center ${
+					weatherData.weather ? 'justify-between' : 'justify-center'
+				} text-3xl px-10`}
 			>
 				{tempAndPop()}
 			</div>
