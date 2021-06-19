@@ -1,70 +1,70 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
-import {IWeathersByDay} from '../Interfaces/weatherData';
+import { IWeathersByDay } from '../Interfaces/weatherData';
 
-import {getWeatherByDay} from '../Utils/getWeatherByDay';
+import { getWeatherByDay } from '../Utils/getWeatherByDay';
 
 import WeatherCard from '../Components/WeatherCard';
 
 const useFetch = (): [boolean, boolean, Date, () => JSX.Element] => {
-	const [isLoading, setIsLoading] = useState(false);
-	const [isError, setIsError] = useState(false);
-	const [data, setData] = useState<IWeathersByDay | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [data, setData] = useState<IWeathersByDay | null>(null);
 
-	const updateTimeInit = new Date();
-	const [updateTime, setUpdateTime] = useState(updateTimeInit);
+  const updateTimeInit = new Date();
+  const [updateTime, setUpdateTime] = useState(updateTimeInit);
 
-	const handleFetch = async () => {
-		setIsLoading(true);
-		setIsError(false);
+  const handleFetch = async () => {
+    setIsLoading(true);
+    setIsError(false);
 
-		try {
-			const weatherData = await getWeatherByDay();
-			setData(weatherData);
-		} catch {
-			setIsError(true);
-		}
+    try {
+      const weatherData = await getWeatherByDay();
+      setData(weatherData);
+    } catch {
+      setIsError(true);
+    }
 
-		setIsLoading(false);
-	};
+    setIsLoading(false);
+  };
 
-	const handleUpdateTime = () => {
-		const time = new Date();
-		setUpdateTime(time);
-	};
+  const handleUpdateTime = () => {
+    const time = new Date();
+    setUpdateTime(time);
+  };
 
-	const tick = async () => {
-		await handleFetch();
-		handleUpdateTime();
-	};
+  const tick = async () => {
+    await handleFetch();
+    handleUpdateTime();
+  };
 
-	useEffect(() => {
-		tick();
-		const hourInMilliseconds = 1000 * 60 * 60;
-		const timerID = setInterval(() => tick(), hourInMilliseconds);
-		return () => {
-			clearInterval(timerID);
-		};
-	}, []);
+  useEffect(() => {
+    tick();
+    const hourInMilliseconds = 1000 * 60 * 60;
+    const timerID = setInterval(() => tick(), hourInMilliseconds);
+    return () => {
+      clearInterval(timerID);
+    };
+  }, []);
 
-	const render = () => {
-		let result;
-		if (data) {
-			result = (
-				<div className="flex flex-row space-x-10 m-10">
-					<WeatherCard {...data.today} />
-					<WeatherCard {...data.tomorrow} />
-					<WeatherCard {...data.afterTomorrow} />
-				</div>
-			);
-		} else {
-			result = <div>DATA IS NULL OR UNDEFINED</div>;
-		}
+  const render = () => {
+    let result;
+    if (data) {
+      result = (
+        <div className="flex flex-row space-x-10 m-10">
+          <WeatherCard {...data.today} />
+          <WeatherCard {...data.tomorrow} />
+          <WeatherCard {...data.afterTomorrow} />
+        </div>
+      );
+    } else {
+      result = <div>DATA IS NULL OR UNDEFINED</div>;
+    }
 
-		return result;
-	};
+    return result;
+  };
 
-	return [isLoading, isError, updateTime, render];
+  return [isLoading, isError, updateTime, render];
 };
 
 export default useFetch;
