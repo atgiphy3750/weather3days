@@ -26,13 +26,13 @@ const WeatherCard = (weatherData: IWeatherDataParsed) => {
       weather.color = colors.cloudy;
       break;
     case '눈':
-      weather.Icon = WiRain;
+      weather.Icon = WiSnow;
       weather.color = colors.snowy;
       break;
     case '비':
     case '비/눈':
     case '소나기':
-      weather.Icon = WiSnow;
+      weather.Icon = WiRain;
       weather.color = colors.rainy;
       break;
     default:
